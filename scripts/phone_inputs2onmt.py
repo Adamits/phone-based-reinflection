@@ -18,7 +18,7 @@ if __name__=='__main__':
 
   lemmas = [l.strip() for l in codecs.open(FN + "-lemmas", 'r', 'utf-8')]
   wfs = [l.strip() for l in codecs.open(FN + "-word_forms", 'r', 'utf-8')]
-  labels = [l.strip() for l in codecs.open(FN.replace("onmt-phone-inputs", "onmt-character-inputs") + "-labels", 'r', 'utf-8')]
+  labels = [l.strip() for l in codecs.open(FN.replace("onmt-phone-inputs", "onmt-character-inputs") + "-labels.txt", 'r', 'utf-8')]
 
   out_fn = output + FN.split("/")[-1]
   with codecs.open(out_fn + "-src.txt", "w", "utf-8") as out:
