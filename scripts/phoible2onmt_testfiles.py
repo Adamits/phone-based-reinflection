@@ -4,11 +4,36 @@ import argparse
 import random
 
 def read_pron_data(fn):
+  # Ignore lines that we know have bad data
+  IGNORE = ["}}, {{"]
   with codecs.open(fn, "r", 'utf-8') as file:
-    lines = [l.strip() for l in file]
+    lines = [l.strip() for l in file for i in IGNORE if i not in l]
     tuples = [tuple(l.split("\t")) for l in lines]
 
   return tuples
+
+def structure_data(characters):
+  """
+  Note this is written with just the Finnish diachritics in mind. This will have to be expanded
+   to be more exhaustive if we continue to experiment with other languages
+  """
+  # Ignore superfluous diachritics and optional symbol
+  IGNORE = ["ˈ", "ˌ", "'", "̪", "̞", "ˣ", "̯", "-", "(", ")", "[", "]"]
+  out = []
+  for i, c in enumerate(characters):
+    if c in IGNORE:
+      continue
+    # "ː" should be part of the character (no space between), also account for variation
+    # in vowel length character used
+    elif c == "ː" or c == ":":
+      out[-1] += "ː"
+    # Do not add the optional characters, either (In Finnish seems to just be a glottal stop)
+    elif i > 0 and characters[i - 1] == "(" and characters[i + 1] == ")":
+      continue
+    else:
+      out.append(c)
+
+  return ' '.join(out)
 
 if __name__=='__main__':
   parser = argparse.ArgumentParser(description='convert the phoible aligned wiki data to a representation that can be an input to Opennmt-py')
@@ -32,6 +57,6 @@ if __name__=='__main__':
   out_tgt = output + "/%s-test-tgt" % language
 
   with codecs.open(out_src, "w", 'utf-8') as src:
-    src.write('\n'.join([' '.join(graphemes) for lang, alphabet, graphemes, phone_chars, phones in data]))
+    src.write('\n'.join([structure_data(graphemes) for lang, alphabet, graphemes, phone_chars, phones in data]))
   with codecs.open(out_tgt, "w", 'utf-8') as tgt:
-    tgt.write('\n'.join([' '.join(phones) for lang, alphabet, graphemes, phone_chars, phones in data]))
+    tgt.write('\n'.join([structure_data(phones) for lang, alphabet, graphemes, phone_chars, phones in data]))
