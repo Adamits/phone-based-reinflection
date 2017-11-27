@@ -55,7 +55,7 @@ if __name__=='__main__':
   #Train/Dev split
   data = [l for l in read_pron_data(input) if l[0] == language_code]
   random.shuffle(data)
-  split_index = int(len(data) * .9)
+  split_index = int(len(data) * .8)
   train = data[:split_index]
   dev = data[split_index:]
 
