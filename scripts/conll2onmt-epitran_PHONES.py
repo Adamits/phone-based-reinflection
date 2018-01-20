@@ -37,8 +37,8 @@ if __name__=='__main__':
   labels = [" ".join(labels.split(";")) for _, _, labels in data]
 
   # Output src/tgt files for ONMT. Notice this will work for train AND dev files
-  with codecs.open(output + "/" + FN.split("/")[-1] + "-src.txt", "w", "utf-8") as out:
+  with codecs.open(output + "-src.txt", "w", "utf-8") as out:
     out.write("\n".join([lem + " " + lab for lem, lab in zip(lemmas, labels)]))
 
-  with codecs.open(output + "/" + FN.split("/")[-1] + "-tgt.txt", "w", "utf-8") as out:
+  with codecs.open(output + "-tgt.txt", "w", "utf-8") as out:
     out.write("\n".join([wf for wf in wfs]))
