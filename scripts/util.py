@@ -1,19 +1,13 @@
-import epitran
-import panphon
-
-ft = panphon.FeatureTable()
-
-def get_phones(lang, text):
+def get_phones(epi, text):
   """
   Given a string of orthographic text, and a language name,
   return the string of the phonetic representation for that text using epitran g2p system
   """
-  epi = epitran.Epitran(lang2ISO(lang))
   phones = epi.transliterate(text)
 
   return phones
 
-def get_features(lang, text="", phones=""):
+def get_features(ft, text="", phones=""):
   """
   Given a language, and either text string or string of the phonetic representation
   return the list of Segments, a class defined in the panphon library
@@ -86,5 +80,5 @@ def lang2ISO(lang):
     "Yoruba": "yor-Latn",
     "Zulu": "zul-Latn",
   }
-  lookup =  {k.lower(): v for k, v in lookup.items()}
+  lookup =  {k.lower(): v for k, v in LOOKUP.items()}
   return(lookup[lang.lower()])
