@@ -6,7 +6,7 @@ ROOT="$1"
 LANG="german"
 
 # Format the dev files, and get the g2p
-python "$ROOT"/phone-based-reinflection/scripts/conll2onmt-epitran_PHONES.py "$LANG" "$ROOT"/phone-based-reinflection/data/"$LANG"-dev "$ROOT"/phone-based-reinflection/data/onmt-phone-inputs/"$LANG"-train-"$s"
+python "$ROOT"/phone-based-reinflection/scripts/conll2onmt-epitran_PHONES.py "$LANG" "$ROOT"/phone-based-reinflection/data/"$LANG"-dev "$ROOT"/phone-based-reinflection/onmt-phone-inputs/"$LANG"-train-"$s"
 
 # Try all settings
 for s in low medium high;
