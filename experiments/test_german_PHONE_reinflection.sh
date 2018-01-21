@@ -6,7 +6,7 @@ LANG="german"
 MODEL_FN="$(basename $MODEL)"
 
 # Format the test data, and get the g2p
-python "$ROOT"/phone-based-reinflection/scripts/conll2onmt-epitran_PHONES.py "$LANG" "$ROOT"/"$LANG"-uncovered-test "$ROOT"/phone-based-reinflection/data/onmt-phone-inputs/"$LANG"-test
+python "$ROOT"/phone-based-reinflection/scripts/conll2onmt-epitran_PHONES.py "$LANG" "$ROOT"/phone-based-reinflection/data/"$LANG"-uncovered-test "$ROOT"/phone-based-reinflection/data/onmt-phone-inputs/"$LANG"-test
 
 # Try all settings
 for s in low medium high;
