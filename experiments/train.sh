@@ -3,7 +3,7 @@
 # This uses epitran G2P
 
 ROOT="$1"
-LANG="bengali"
+LANG="$2"
 
 # Format the dev files, and get the g2p
 python "$ROOT"/phone-based-reinflection/scripts/conll2onmt-epitran_PHONES.py "$LANG" "$ROOT"/phone-based-reinflection/data/"$LANG"-dev "$ROOT"/phone-based-reinflection/data/onmt-phone-inputs/"$LANG"-dev
