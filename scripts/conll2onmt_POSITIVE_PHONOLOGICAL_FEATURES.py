@@ -16,14 +16,6 @@ of each character
 +feature -feature etc #
 """
 
-def int2sym(v):
-  if v == 1:
-    return "+"
-  elif v == 0:
-    return "0"
-  elif v == -1:
-    return "-"
-
 def feature_extraction(epi, ft, text):
   """
   Given a piece of text (assumed to be a lemma for WF), generate a string of phonological features
@@ -34,7 +26,7 @@ def feature_extraction(epi, ft, text):
   for phones in phones_list:
     feature_strings = []
     for f in get_features(ft, phones=phones):
-      feature_strings.append(" ".join(["%s%s" % (int2sym(v), k)  for k, v in f.items()]))
+      feature_strings.append(" ".join(["%s%s" % ("+", k)  for k, v in f.items() if v == 1]))
     features.append(" # ".join(feature_strings))
 
   return " $ ".join(features)
