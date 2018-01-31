@@ -8,8 +8,8 @@ LANG="$2"
 # Format the dev files, and get the g2p
 python "$ROOT"/phone-based-reinflection/scripts/conll2onmt_PHONOLOGICAL_FEATURES.py "$LANG" "$ROOT"/phone-based-reinflection/data/"$LANG"-dev "$ROOT"/phone-based-reinflection/data/onmt-phone-feature-inputs/"$LANG"-dev
 
-# Try all settings
-for s in low medium high;
+# Try these settings
+for s in medium high;
 do
   # Format the train data, and get the g2p
   python "$ROOT"/phone-based-reinflection/scripts/conll2onmt_PHONOLOGICAL_FEATURES.py "$LANG" "$ROOT"/phone-based-reinflection/data/"$LANG"-train-"$s" "$ROOT"/phone-based-reinflection/data/onmt-phone-feature-inputs/"$LANG"-train-"$s"
