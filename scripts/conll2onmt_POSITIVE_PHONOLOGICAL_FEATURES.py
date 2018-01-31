@@ -23,7 +23,7 @@ def feature_extraction(epi, ft, text):
     feature_strings = []
     for f in get_features(ft, phones=phones):
       # Consider also delimiting with ~
-      feature_strings.append("".join(["%s" % (k)  for k, v in f.items() if v == 1]))
+      feature_strings.append("+".join(["%s" % (k)  for k, v in f.items() if v == 1]))
     features.append(" ".join(feature_strings))
 
   return " # ".join(features)
