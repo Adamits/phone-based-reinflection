@@ -16,5 +16,5 @@ do
   # Preprocess and train an ONMT model on files formatted above
   python "$ROOT"/OpenNMT-py/preprocess.py -train_src  "$ROOT"/phone-based-reinflection/data/onmt-phone-feature-inputs/"$LANG"-train-"$s"-src.txt -train_tgt  "$ROOT"/phone-based-reinflection/data/onmt-phone-feature-inputs/"$LANG"-train-"$s"-tgt.txt -valid_src  "$ROOT"/phone-based-reinflection/data/onmt-phone-feature-inputs/"$LANG"-dev-src.txt -valid_tgt  "$ROOT"/phone-based-reinflection/data/onmt-phone-feature-inputs/"$LANG"-dev-tgt.txt -save_data "$ROOT"/phone-based-reinflection/reinflection-phonological-feature-models/"$LANG"-phone-features-"$s"
   # Added arg to only save last (50th) model
-  python "$ROOT"/OpenNMT-py/train.py -data "$ROOT"/phone-based-reinflection/reinflection-phonological-feature-models/"$LANG"-phone-features-"$s" -save_model "$ROOT"/phone-based-reinflection/reinflection-phonological-feature-models/"$LANG"-phone-features-"$s"-model -epochs 50 -brnn -start_checkpoint_at 49 -gpuid 0
+  python "$ROOT"/OpenNMT-py/train.py -data "$ROOT"/phone-based-reinflection/reinflection-phonological-feature-models/"$LANG"-phone-features-"$s" -save_model "$ROOT"/phone-based-reinflection/reinflection-phonological-feature-models/"$LANG"-phone-features-"$s"-model -epochs 50 -encoder_type brnn -start_checkpoint_at 49 -gpuid 0
 done;
