@@ -8,12 +8,8 @@ import panphon
 
 """
 Convert data from ConLL Sigmorph shared task on morphological reinflection
-to format necessary to use OpenNMT using epitran to get the phonological feature representation
+to format necessary to use OpenNMT using epitran to get the POSITIVE phonological feature representation
 of each character
-"""
-
-"""
-+feature -feature etc #
 """
 
 def feature_extraction(epi, ft, text):
@@ -26,10 +22,11 @@ def feature_extraction(epi, ft, text):
   for phones in phones_list:
     feature_strings = []
     for f in get_features(ft, phones=phones):
-      feature_strings.append(" ".join(["%s%s" % ("+", k)  for k, v in f.items() if v == 1]))
-    features.append(" # ".join(feature_strings))
+      # Consider also delimiting with ~
+      feature_strings.append("".join(["%s" % (k)  for k, v in f.items() if v == 1]))
+    features.append(" ".join(feature_strings))
 
-  return " $ ".join(features)
+  return " # ".join(features)
 
 if __name__=='__main__':
   if len(argv) != 4:

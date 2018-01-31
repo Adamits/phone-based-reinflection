@@ -12,10 +12,6 @@ to format necessary to use OpenNMT using epitran to get the phonological feature
 of each character
 """
 
-"""
-+feature -feature etc #
-"""
-
 def int2sym(v):
   if v == 1:
     return "+"
@@ -34,10 +30,11 @@ def feature_extraction(epi, ft, text):
   for phones in phones_list:
     feature_strings = []
     for f in get_features(ft, phones=phones):
-      feature_strings.append(" ".join(["%s%s" % (int2sym(v), k)  for k, v in f.items()]))
-    features.append(" # ".join(feature_strings))
+      # Consider also delimiting with ~
+      feature_strings.append("".join(["%s%s" % (int2sym(v), k)  for k, v in f.items()]))
+    features.append(" ".join(feature_strings))
 
-  return " $ ".join(features)
+  return " # ".join(features)
 
 if __name__=='__main__':
   if len(argv) != 4:
