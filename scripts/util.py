@@ -17,12 +17,11 @@ def get_features(ft, text="", phones=""):
   else:
     return ft.word_fts(get_phones(lang, text))
 
-def lang2ISO(lang):
+def get_lookup():
   """
-  Convert a given language to its ISO code for lookup in epitran.
+  Note that we are maping both Persian and Farsi to the farsilanguage code..
   """
-  # Most of the languages in epitran, per their README
-  LOOKUP = {
+  return {
     "Afar": "aar-Latn",
     "Amharic": "amh-Ethi",
     "Bengali": "ben-Beng",
@@ -34,6 +33,7 @@ def lang2ISO(lang):
     "German": "deu-Latn",
     "English": "eng-Latn",
     "Farsi:": "fas-Arab",
+    "Persian:": "fas-Arab",
     "French": "fra-Latn",
     "Hausa": "hau-Latn",
     "Hindi": "hin-Deva",
@@ -80,5 +80,12 @@ def lang2ISO(lang):
     "Yoruba": "yor-Latn",
     "Zulu": "zul-Latn",
   }
-  lookup =  {k.lower(): v for k, v in LOOKUP.items()}
+
+
+def lang2ISO(lang):
+  """
+  Convert a given language to its ISO code for lookup in epitran.
+  """
+  # Most of the languages in epitran, per their README
+  lookup =  {k.lower(): v for k, v in get_lookup().items()}
   return(lookup[lang.lower()])
