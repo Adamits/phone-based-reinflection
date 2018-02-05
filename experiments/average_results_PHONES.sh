@@ -4,10 +4,10 @@ ROOT="$1"
 
 # Loop over every lang that is in the SIGMORPHON data, AND that epitran supports
 for l in bengali catalan dutch english french german hindi hungarian italian kurmanji persian polish portuguese russian sorani spanish swedish ukranian; do
-  python "$ROOT"/phone-based-reinflection/scripts/conll2onmt-epitran_PHONES.py "$l" "$ROOT"/phone-based-reinflection/data/"$l"-dev "$ROOT"/phone-based-reinflection/average_PHONE_inputs
+  python "$ROOT"/phone-based-reinflection/scripts/conll2onmt-epitran_PHONES.py "$l" "$ROOT"/phone-based-reinflection/data/"$l"-dev "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-dev
 
   # Format the train data
-  python "$ROOT"/phone-based-reinflection/scripts/conll2onmt-epitran_PHONES.py "$l" "$ROOT"/phone-based-reinflection/data/"$l"-train-high "$ROOT"/phone-based-reinflection/average_PHONE_inputs
+  python "$ROOT"/phone-based-reinflection/scripts/conll2onmt-epitran_PHONES.py "$l" "$ROOT"/phone-based-reinflection/data/"$l"-train-high "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-train-high
   # Preprocess and train an ONMT model on files formatted above
   python "$ROOT"/OpenNMT-py/preprocess.py -train_src  "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-train-high-src.txt -train_tgt  "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-train-high-tgt.txt -valid_src  "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-dev-src.txt -valid_tgt  "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-dev-tgt.txt -save_data "$ROOT"/phone-based-reinflection/average_PHONE_models/"$l"-high
   python "$ROOT"/OpenNMT-py/train.py -data "$ROOT"/phone-based-reinflection/average_PHONE_models/"$l"-high -save_model "$ROOT"/phone-based-reinflection/average_PHONE_models/"$l"-high-model -epochs 50 -start_checkpoint_at 50 -encoder_type brnn -gpuid 0
