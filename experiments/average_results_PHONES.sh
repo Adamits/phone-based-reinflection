@@ -3,7 +3,7 @@
 ROOT="$1"
 
 # Loop over every lang that is in the SIGMORPHON data, AND that epitran supports
-for l in bengali catalan dutch english french german hindi hungarian italian kurmanji persian polish portuguese russian sorani spanish swedish ukranian; do
+for l in bengali catalan dutch english french german hindi hungarian italian kurmanji persian polish portuguese russian sorani spanish swedish ukrainian; do
   python "$ROOT"/phone-based-reinflection/scripts/conll2onmt-epitran_PHONES.py "$l" "$ROOT"/phone-based-reinflection/data/"$l"-dev "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-dev
 
   # Format the train data
@@ -15,16 +15,16 @@ done;
 
 
 # Now test the models from above
-for l in bengali catalan dutch english french german hindi hungarian italian kurmanji persian polish portuguese russian sorani spanish swedish ukranian; do
+for l in bengali catalan dutch english french german hindi hungarian italian kurmanji persian polish portuguese russian sorani spanish swedish ukrainian; do
   # Find the PATH to the (unique) model from the training above, per language
   MODEL="$(echo "$ROOT"/phone-based-reinflection/average_PHONE_models/"$l"-high-model_acc*.pt)"
 
   # Format the test data
   python "$ROOT"/phone-based-reinflection/scripts/conll2onmt-epitran_PHONES.py "$l" "$ROOT"/phone-based-reinflection/data/"$l"-uncovered-test "$ROOT"/phone-based-reinflection/average_PHONE_inputs
 
-  python "$ROOT"/OpenNMT-py/translate.py -model "$MODEL" -src "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-test-src.txt -tgt "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-test-tgt.txt  -output "$ROOT"/phone-based-reinflection/average_PHONE_preds/"$l"-pred.txt -replace_unk
+  python "$ROOT"/OpenNMT-py/translate.py -model "$MODEL" -src "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-uncovered-test-src.txt -tgt "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-uncovered-test-tgt.txt  -output "$ROOT"/phone-based-reinflection/average_PHONE_preds/"$l"-pred.txt -replace_unk
 
-  ACC=$(python "$ROOT"/phone-based-reinflection/scripts/evalm.py --gold "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"l"-test-tgt.txt --guess "$ROOT"/phone-based-reinflection/average_PHONE_preds/"$l"-pred.txt)
+  ACC=$(python "$ROOT"/phone-based-reinflection/scripts/evalm.py --gold "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-uncovered-test-tgt.txt --guess "$ROOT"/phone-based-reinflection/average_PHONE_preds/"$l"-pred.txt)
   ACCFILE="$ROOT"/phone-based-reinflection/average_accuracies/PHONE.acc
 
   echo "$LANG: $ACC" >> "$ACCFILE"

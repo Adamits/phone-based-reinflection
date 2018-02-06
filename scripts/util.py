@@ -71,7 +71,7 @@ def get_lookup():
     "Tagalog": "tgl-Latn",
     "Thai": "tha-Thai",
     "Tigrinya": "tir-Ethi",
-    "Ukranian": "ukr-Cyrl",
+    "Ukrainian": "ukr-Cyrl",
     "Uyghur-Perso-Arabic)": "uig-Arab",
     "Uzbek-Cyrillic)": "uzb-Cyrl",
     "Uzbek-Latin": "uzb-Latn",
