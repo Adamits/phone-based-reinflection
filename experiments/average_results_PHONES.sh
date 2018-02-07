@@ -27,7 +27,7 @@ for l in bengali catalan dutch english french german hindi hungarian italian kur
   ACC=$(python "$ROOT"/phone-based-reinflection/scripts/evalm.py --gold "$ROOT"/phone-based-reinflection/average_PHONE_inputs/"$l"-uncovered-test-tgt.txt --guess "$ROOT"/phone-based-reinflection/average_PHONE_preds/"$l"-pred.txt)
   ACCFILE="$ROOT"/phone-based-reinflection/average_accuracies/PHONE.acc
 
-  echo "$LANG: $ACC" >> "$ACCFILE"
+  echo "$l: $ACC" >> "$ACCFILE"
 done;
 
 python "$ROOT"/phone-based-reinflection/scripts/calculate_total_accuracies.py "$ROOT"/phone-based-reinflection/average_accuracies/PHONE.acc
