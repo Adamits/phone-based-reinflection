@@ -21,9 +21,11 @@ if __name__=='__main__':
   total_lev = 0
   print(data)
 
-  for lang, acc_label, acc, lev_label, lev in data:
-    total_acc += float(acc)
-    total_lev += float(lev)
+  # If there are 5 things in the lin
+  if len(data) == 5:
+    for lang, acc_label, acc, lev_label, lev in data:
+      total_acc += float(acc)
+      total_lev += float(lev)
 
   print("AVERAGE ACCURACY: %.2f" % (total_acc / len(data)))
   print("AVERAGE LEVENSHTEIN DISTANCE: %.2f" % (total_lev / len(data)))
