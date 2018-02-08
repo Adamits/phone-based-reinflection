@@ -26,7 +26,7 @@ def feature_extraction(epi, ft, text):
       feature_strings.append(" +".join(["%s" % (k)  for k, v in f.items() if v == 1]))
     # Forgot to add '+' to first in the list, as join does not do this
     feature_strings[0] = "+" + feature_strings[0]
-    features.append(" # ".join(feature_strings))
+    features.append(" # +".join(feature_strings))
 
   return " $ ".join(features)
 
