@@ -3,3 +3,4 @@ g2p-models/*
 .idea/*
 *.pyc
 data/*
+average_*/
