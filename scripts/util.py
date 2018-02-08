@@ -7,15 +7,12 @@ def get_phones(epi, text):
 
   return phones
 
-def get_features(ft, text="", phones=""):
+def get_features(ft, phones):
   """
   Given a language, and either text string or string of the phonetic representation
   return the list of Segments, a class defined in the panphon library
   """
-  if phones:
-    return ft.word_fts(phones)
-  else:
-    return ft.word_fts(get_phones(lang, text))
+  return ft.word_fts(phones)
 
 def get_lookup():
   """
@@ -32,8 +29,8 @@ def get_lookup():
     "Sorani": "ckb-Arab",
     "German": "deu-Latn",
     "English": "eng-Latn",
-    "Farsi:": "fas-Arab",
-    "Persian:": "fas-Arab",
+    "Farsi": "fas-Arab",
+    "Persian": "fas-Arab",
     "French": "fra-Latn",
     "Hausa": "hau-Latn",
     "Hindi": "hin-Deva",
