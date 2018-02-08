@@ -2,3 +2,4 @@ g2p-models/*
 .idea
 .idea/*
 *.pyc
+data/*
