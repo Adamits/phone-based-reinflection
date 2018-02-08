@@ -20,7 +20,7 @@ for l in bengali catalan dutch english french german hindi hungarian italian kur
   MODEL="$(echo "$ROOT"/phone-based-reinflection/average_POSITIVE_PHONE_FEATURE_models/"$l"-high-model_acc*.pt)"
 
   # Format the test data
-  python "$ROOT"/phone-based-reinflection/scripts/conll2onmt_POSITIVE_PHONOLOGICAL_FEATURES.py "$l" "$ROOT"/phone-based-reinflection/data/"$l"-uncovered-test "$ROOT"/phone-based-reinflection/average_POSITIVE_PHONE_FEATURE_inputs
+  python "$ROOT"/phone-based-reinflection/scripts/conll2onmt_POSITIVE_PHONOLOGICAL_FEATURES.py "$l" "$ROOT"/phone-based-reinflection/data/"$l"-uncovered-test "$ROOT"/phone-based-reinflection/average_POSITIVE_PHONE_FEATURE_inputs/"$l"-uncovered-test
 
   python "$ROOT"/OpenNMT-py/translate.py -model "$MODEL" -src "$ROOT"/phone-based-reinflection/average_POSITIVE_PHONE_FEATURE_inputs/"$l"-uncovered-test-src.txt -tgt "$ROOT"/phone-based-reinflection/average_POSITIVE_PHONE_FEATURE_inputs/"$l"-uncovered-test-tgt.txt  -output "$ROOT"/phone-based-reinflection/average_POSITIVE_PHONE_FEATURE_preds/"$l"-pred.txt -replace_unk
 
